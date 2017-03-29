@@ -1,0 +1,51 @@
+html, body {
+  height: 100%;
+}
+
+#mainHeader {
+  color: red;
+  text-align: center;
+  font-family: 'Faster One';
+  font-size: 80px;
+}
+
+.navbar-nav {
+    width: 100%;
+    text-align: center;
+}
+
+
+.navbar-nav > li {
+  float: none;
+  display: inline-block;
+}
+  
+.carousel-img img {
+  width: auto;
+  height: 225px;
+  max-height: 225px;
+}
+
+ form {
+  width:50%;
+  margin:30 auto;
+  border-style: double dotted double;
+  border-width: thick;
+  border-color: red;
+  padding: 20px;
+  text-align: center;
+}
+
+.center_div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#carousel {
+  border-style: double dotted double;
+  border-width: thick;
+  border-color: red;
+  height: 305px;
+  padding: 20px;
+}

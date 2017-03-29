@@ -1,18 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>File Upload Example</title>
+  <title>Insect Collector</title>
   <script src="../vendor/angular.min.js"></script>
   <script src="../vendor/ng-file-upload-all.min.js"></script>
-  <script src="../javascripts/fileuploadExample.js"></script>
+  <script src="../scripts/fileuploadExample.js"></script>
+  <script src="../vendor/angular-route.min.js"></script>
+  <script src="../vendor/angular-animate.min.js"></script>
+  <script src="../vendor/ui-bootstrap.js"></script>
+  <script src="../vendor/ui-bootstrap-tpls.js"></script>
+  <script src="../vendor/firebase.js"></script>
+  <script src="../vendor/angularfire.min.js"></script>
+  <script src="../scripts/config.js"></script>
+  <script src="../scripts/client.js"></script>
+  <script src="../scripts/factories/insect.factory.js"></script>
+  <script src="../scripts/controllers/login.controller.js"></script>
+  <script src="../scripts/controllers/gallery.controller.js"></script>
+  <script src="../scripts/controllers/upload.controller.js"></script>
+  <link rel="stylesheet" href="../vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="../styles/style.css">
+  <link href='//fonts.googleapis.com/css?family=Faster One' rel='stylesheet'>
+  <link href='//fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
 </head>
 
 <body ng-app="fileUpload">
   <div ng-controller="formCtrl">
-    <p>{{test}}</p>
+    <p>{{message}}</p>
+    <h1>This is a MEAN stack file upload example!</h1>
+    <form ng-submit="submit()">
+      <legend>Upload a new file here:</legend>
+      <label for="description">Description:</label>
+      <textarea rows="3" type="text" name="description" id="description" ng-model="upload.description" required placeholder="Location -- Time -- Weather"></textarea>
+      <br/>
+      <label for="file">File:</label>
+      <input type="file" name="file" id="file" ng-model="upload.file" ngf-select ngf-max-size="25MB" required/>
+      <br/>
+      <input type="submit" value="Submit" />
+    </form>
+
+    <h2>All uploads are here:</h2>
+    <ul>
+      <li ng-repeat="upload in uploads">
+        <p>{{upload.name}}</p>
+        <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}'>
+      </li>
+    </ul>
   </div>
 </body>
-
 
 </html>
