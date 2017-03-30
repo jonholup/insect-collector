@@ -57,8 +57,6 @@ myApp.factory('InsectFactory', ['$http', function($http) {
   }
 
 
-
-  // this is the public API, if it's not in here, your controller won't see it
   return {
     specimen: specimen,
     bugs: bugs,

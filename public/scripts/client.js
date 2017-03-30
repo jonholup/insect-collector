@@ -8,7 +8,7 @@ myApp.config(['$routeProvider', function ($routeProvider) {
             controllerAs: 'lic'
         }).when('/upload', {
             templateUrl: '/views/templates/upload.html',
-            controller: 'UploadController',
+            controller: 'formCtrl',
             controllerAs: 'uc'
         })
         .when('/gallery', {
@@ -20,6 +20,6 @@ myApp.config(['$routeProvider', function ($routeProvider) {
             templateUrl: '/views/templates/resources.html'
         })
         .otherwise({
-            redirectTo: 'gallery'
+            redirectTo: 'login'
         });
 }]);

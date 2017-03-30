@@ -25,29 +25,15 @@
   <link href='//fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
 </head>
 
-<body ng-app="fileUpload">
-  <div ng-controller="formCtrl">
-    <p>{{message}}</p>
-    <h1>This is a MEAN stack file upload example!</h1>
-    <form ng-submit="submit()">
-      <legend>Upload a new file here:</legend>
-      <label for="description">Description:</label>
-      <textarea rows="3" type="text" name="description" id="description" ng-model="upload.description" required placeholder="Location -- Time -- Weather"></textarea>
-      <br/>
-      <label for="file">File:</label>
-      <input type="file" name="file" id="file" ng-model="upload.file" ngf-select ngf-max-size="25MB" required/>
-      <br/>
-      <input type="submit" value="Submit" />
-    </form>
+<body ng-app="InsectApp">
+  <header class="text-center" id="mainHeader" ng-include="'/views/templates/header.html'"></header>
+  <div ng-controller="LogInController as lic">
+    <nav ng-if="lic.userIsLoggedIn" ng-include="'/views/templates/nav.html'"></nav>
+    <button class="col-md-12 text-center" ng-if="lic.userIsLoggedOut" ng-click="lic.logIn()" class="g-signin2">Log In</button>
 
-    <h2>All uploads are here:</h2>
-    <ul>
-      <li ng-repeat="upload in uploads">
-        <p>{{upload.name}}</p>
-        <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}'>
-      </li>
-    </ul>
-  </div>
+    <div ng-if="lic.userIsLoggedIn">
+      <main ng-view>
+      </main>
 </body>
 
 </html>

@@ -1,22 +1,27 @@
-myApp.controller("GalleryController", ['InsectFactory', '$http', '$firebaseAuth', function (InsectFactory, $http, $firebaseAuth) {
+myApp.controller("GalleryController", ['InsectFactory', '$http', '$firebaseAuth', '$scope', function (InsectFactory, $http, $firebaseAuth, $scope) {
     console.log('GalleryController was loaded');
     var self = this;
     var auth = $firebaseAuth();
 
-    self.getBugs = function () {
-        InsectFactory.getBugs().then(function(data) {
-        self.bugs = data;
-        console.log(self.bugs);
-        });
-    };
+       $http.get('/uploads').then(function(response){
+    console.log(response.data);
+    $scope.uploads = response.data;
+  });
 
-    self.getInfo = function () {
-        InsectFactory.getInfo().then(function(data) {
-            self.specimen = data;
-        });
-    };
+    // self.getBugs = function () {
+    //     InsectFactory.getBugs().then(function(data) {
+    //     self.bugs = data;
+    //     console.log(self.bugs);
+    //     });
+    // };
 
-self.getBugs();
+    // self.getInfo = function () {
+    //     InsectFactory.getInfo().then(function(data) {
+    //         self.specimen = data;
+    //     });
+    // };
+
+// self.getBugs();
 
 
     // run route to get images from db

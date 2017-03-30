@@ -1,26 +1,44 @@
 // [START vision_quickstart]
 // Imports the Google Cloud client library
-myApp.controller("UploadController", ['InsectFactory', '$http', 'Upload', function(InsectFactory, $http, Upload) {
-  console.log('UploadController was loaded');
-  var self = this;
-  self.newBug = {};
+// myApp.controller("UploadController", ['InsectFactory', '$http', 'Upload', function(InsectFactory, $http, Upload) {
+//   console.log('UploadController was loaded');
+//   var self = this;
+//   self.newBug = {};
 
-  self.submit = function () {
+//   self.submit = function () {
 
-    console.log('newBug:', self.newBug);
-     Upload.upload({
-        url: './getBug/uploads',
+//     console.log('newBug:', self.newBug);
+//      Upload.upload({
+//         url: './getBug/uploads',
+//         method: 'post',
+//         data: self.newBug
+//       }).then(function (response) {
+//         console.log(response.data);
+//         self.getBug.push(response.data);
+//         self.newBug = {};
+//       });
+//   };
+//       $http.get('./getBug/uploads').then(function(response){
+//     console.log(response.data);
+//     self.uploads = response.data;
+//   });
+
+  myApp.controller('formCtrl', ['InsectFactory', '$scope', '$http', 'Upload', function(InsectFactory, $scope, $http, Upload){
+  $scope.message = 'hi';
+  $scope.submit = function(){
+      Upload.upload({
+        url: '/uploads',
         method: 'post',
-        data: self.newBug
+        data: $scope.upload
       }).then(function (response) {
         console.log(response.data);
-        self.getBug.push(response.data);
-        self.newBug = {};
+        $scope.uploads.push(response.data);
+        $scope.upload = {};
       });
-  };
-      $http.get('./getBug/uploads').then(function(response){
+    };
+    $http.get('/uploads').then(function(response){
     console.log(response.data);
-    self.uploads = response.data;
+    $scope.uploads = response.data;
   });
   // self.onFileSelect = function ($files) {
   //   Upload.upload({

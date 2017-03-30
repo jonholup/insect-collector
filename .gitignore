@@ -1,1 +1,8 @@
+.DS_Store
 node_modules
+*.log
+.firebaserc
+.env
+.gitignore
+server/insect-collector-76b09bf1fbc3.json
+server/firebase-service-account.json

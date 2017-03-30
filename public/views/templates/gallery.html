@@ -1,20 +1,19 @@
-<div class ="container">
+<div class="container">
 
-<!--{{gc.bugs[1].imageURL}}-->
+  <!--{{gc.bugs[1].imageURL}}-->
   <div id="carousel">
     <div uib-carousel active="active" no-wrap="noWrapSlides">
-      <div class="carousel-img" uib-slide ng-repeat="slide in gc.bugs track by $index" index="$index">
-        <img ng-click="gc.getInfo()"ng-src="{{slide.imageURL}}" style="margin:auto;">
+      <div class="carousel-img" uib-slide ng-repeat="upload in uploads track by $index" index="$index">
+        <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' style="margin:auto;">
         <div class="carousel-caption">
+       
         </div>
       </div>
     </div>
   </div>
 </div>
 <div>
-  <div>
-    <li ng-repeat="thing in gc.specimen[0]">
-      {{thing}}
-    </li>
-  </div>
-</div>
+     <li ng-repeat="upload in uploads">
+            {{upload}}
+          </li>
+          </div>
