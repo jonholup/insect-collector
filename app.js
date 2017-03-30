@@ -7,7 +7,7 @@ var uploads = require('./routes/uploads');
 
 var app = express();
 
-var mongoURI = "mongodb://localhost:27017/phi"; // replace with your mongodb url
+var mongoURI = "mongodb://localhost:27017/insect-collector"; // replace with your mongodb url
 
 var MongoDB = mongoose.connect(mongoURI).connection;
 MongoDB.on('error', function (err) {

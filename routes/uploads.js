@@ -4,6 +4,9 @@ var fs = require('fs');
 var Upload = require('../server/models/upload');
 var multer = require('multer');
 var upload = multer({dest: 'uploads/'});
+var projectId = 'insect-collector';
+var Vision = require('@google-cloud/vision');
+var path = require('path');
 /**
  * Create's the file in the database
  */
@@ -15,13 +18,43 @@ router.post('/', upload.single('file'), function (req, res, next) {
     created: Date.now(),
     file: req.file
   };
-  Upload.create(newUpload, function (err, next) {
+  Upload.create(newUpload, function (err, upload) {
     if (err) {
-      next(err);
+      return(err);
     } else {
-      res.send(newUpload);
+      console.log('uploadid:', upload.id);
+      console.log('uploadObject', upload);
+      
+      
+      // res.send(newUpload);
+      // console.log(req.decodedToken);
+    // var userEmail = req.decodedToken.email;
+    // console.log(userEmail);
+    //if null insert user
+    // Instantiates a client
+    console.log('post req.body:', req.body);
+    var visionClient = Vision({
+        projectId: projectId
+    });
+
+    var fileName = upload.file.path + '/' + upload.file.originalname;
+    //fileName = how to pass on imageurl -> not a GET request (or query string data)
+
+    // Performs label detection on the image file
+    visionClient.detectLabels(fileName)
+        .then(function (results) {
+            var labels = results[0];
+
+            console.log('Labels:');
+            labels.forEach(function (label) { console.log(label); });
+            // Database query
+            // if (err) res.sendStatus(500)
+            // else query successful (.then)
+            res.send(results);
+        });
     }
   });
+      console.log('post req.body:', req.body);
 });
 
 /**

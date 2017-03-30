@@ -5,15 +5,15 @@
     <div uib-carousel active="active" no-wrap="noWrapSlides">
       <div class="carousel-img" uib-slide ng-repeat="upload in uploads track by $index" index="$index">
         <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' style="margin:auto;">
-        <div class="carousel-caption">
-       
+        <div class="text-center">
+          {{upload.description}}
         </div>
       </div>
     </div>
   </div>
 </div>
 <div>
-     <li ng-repeat="upload in uploads">
-            {{upload}}
-          </li>
-          </div>
+  <li ng-repeat="upload in uploads">
+    {{upload}}
+  </li>
+</div>
