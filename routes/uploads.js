@@ -3,10 +3,20 @@ var router = express.Router();
 var fs = require('fs');
 var Upload = require('../server/models/upload');
 var multer = require('multer');
-var upload = multer({dest: 'uploads/'});
 var projectId = 'insect-collector';
 var Vision = require('@google-cloud/vision');
 var path = require('path');
+var crypto = require('crypto');
+var storage = multer.diskStorage({
+  destination: './uploads/',
+    filename: function (req, file, cb) {
+      console.log(Date.now() + file.originalname)
+      cb(null, Date.now() + file.originalname);
+  }
+});
+var upload = multer({ storage: storage });
+
+
 /**
  * Create's the file in the database
  */
@@ -18,12 +28,13 @@ router.post('/', upload.single('file'), function (req, res, next) {
     created: Date.now(),
     file: req.file
   };
-  Upload.create(newUpload, function (err, upload) {
+  Upload.create(newUpload, function (err, newUpload) {
     if (err) {
+      console.log(err)
       return(err);
     } else {
-      console.log('uploadid:', upload.id);
-      console.log('uploadObject', upload);
+      console.log('newUploadid:', newUpload.id);
+      console.log('newUploadObject', newUpload);
       
       
       // res.send(newUpload);
@@ -37,7 +48,9 @@ router.post('/', upload.single('file'), function (req, res, next) {
         projectId: projectId
     });
 
-    var fileName = upload.file.path + '/' + upload.file.originalname;
+    var fileName = 'uploads/' + newUpload.file.filename;
+    console.log('newUpload.filename:', newUpload.file.filename);
+    
     //fileName = how to pass on imageurl -> not a GET request (or query string data)
 
     // Performs label detection on the image file
@@ -45,12 +58,11 @@ router.post('/', upload.single('file'), function (req, res, next) {
         .then(function (results) {
             var labels = results[0];
 
-            console.log('Labels:');
-            labels.forEach(function (label) { console.log(label); });
+            console.log('Labels:', labels);
             // Database query
             // if (err) res.sendStatus(500)
             // else query successful (.then)
-            res.send(results);
+           res.status(200).send(results);
         });
     }
   });
