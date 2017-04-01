@@ -8,7 +8,8 @@ app.controller('formCtrl', ['$scope', '$http', 'Upload', function($scope, $http,
         method: 'post',
         data: $scope.upload
       }).then(function (response) {
-        console.log(response.data);
+        console.log('response.data:', response.data);
+        console.log('response:', response);
         $scope.uploads.push(response.data);
         $scope.upload = {};
       });

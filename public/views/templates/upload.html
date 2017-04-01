@@ -5,13 +5,11 @@
       <label for="description">Description:</label>
       <textarea rows="3" type="text" name="description" id="description" ng-model="upload.description" required placeholder="Location -- Time -- Weather"></textarea>
       <br/>
-      <label for="file">File:</label>
       <input type="file" name="file" id="file" ng-model="upload.file" ngf-select ngf-max-size="25MB" required/>
       <br/>
       <input type="submit" value="Submit" />
     </form>
   </div>
-      <p>{{message}}</p>
   <h2>All uploads are here:</h2>
   <ul>
     <li ng-repeat="upload in uploads">

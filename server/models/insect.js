@@ -4,7 +4,7 @@ var InsectSchema = mongoose.Schema({
   description: String,
   valueOne: String,
   valueTwo: String,
-  valuteThree: String,
+  valueThree: String,
   webEntityOne: String,
   webEntityTwo: String,
   webEntityThree: String,

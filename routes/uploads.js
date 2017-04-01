@@ -22,6 +22,7 @@ var upload = multer({ storage: storage });
  * Create's the file in the database
  */
 router.post('/', upload.single('file'), function (req, res, next) {
+  console.log('req.decodedToken:', req.decodedToken);
   console.log(req.body);
   console.log(req.file);
   var newUpload = {
@@ -43,6 +44,17 @@ router.post('/', upload.single('file'), function (req, res, next) {
       var fileName = 'uploads/' + newUpload.file.filename;
       var newInsect = {};
 
+      /// Vision API detects SafeSearch properties ///
+      visionClient.detectSafeSearch(fileName)
+  .then(function (results) {
+    var safeSearch = results[0];
+    /// abort if any properties of detections are true (inappropriate) ///
+    var safeSearchValue = Object.keys(safeSearch).map(key => safeSearch[key]).some(value => value);
+    if (safeSearchValue === true) {
+      res.status(400).send('showAlert');
+    }
+  });
+
       /// Vision API detects labels ///
       visionClient.detectLabels(fileName)
         .then(function (results) {
@@ -63,8 +75,9 @@ router.post('/', upload.single('file'), function (req, res, next) {
       /// Vision API detects webEntities ///
       visionClient.detectSimilar(fileName)
         .then(function (results) {
+          console.log('webResults:', results[1].responses);
+          
           var webEntity = results[1].responses[0].webDetection.webEntities;
-          console.log('similarresults:', results[1].responses[0].webDetection.webEntities[0].description, results[1].responses[0].webDetection.webEntities[1].description, results[1].responses[0].webDetection.webEntities[2].description);
           newInsect.webEntityOne = webEntity[0].description;
           newInsect.webEntityTwo = webEntity[1].description;
           newInsect.webEntityThree = webEntity[2].description;
