@@ -31,6 +31,7 @@ router.post('/', upload.single('file'), function (req, res, next) {
     file: req.file
   };
   Upload.create(newUpload, function (err, newUpload) {
+    var labels = [];
     if (err) {
       console.log(err);
       return (err);
@@ -44,59 +45,89 @@ router.post('/', upload.single('file'), function (req, res, next) {
       var fileName = 'uploads/' + newUpload.file.filename;
       var newInsect = {};
 
-      /// Vision API detects SafeSearch properties ///
-      visionClient.detectSafeSearch(fileName)
-  .then(function (results) {
-    var safeSearch = results[0];
-    /// abort if any properties of detections are true (inappropriate) ///
-    var safeSearchValue = Object.keys(safeSearch).map(key => safeSearch[key]).some(value => value);
-    if (safeSearchValue === true) {
-      res.status(400).send('showAlert');
+      // /// Vision API detects SafeSearch properties - unneccesary as isInsect conditional should catch these///
+      // return visionClient.detectSafeSearch(fileName)
+      //   .then(function (results, err) {
+      //     if (err) {
+      //       console.log('52:::::', err)
+      //     }
+      //     var safeSearch = results[0];
+      //     console.log('safeSearch:', safeSearch);
+
+      //     /// abort if any properties of detections are true (inappropriate) ///
+      //     var safeSearchValue = Object.keys(safeSearch).map(key => safeSearch[key]).some(value => value);
+      //     if (safeSearchValue) {
+      //       res.status(400).send('showAlert');
+      //       return;
+      //     }
+        //  }).then(function () {
+
+
+          /// Vision API detects labels ///
+          return visionClient.detectLabels(fileName)
+            .then(function (results, err) {
+              if (err) {
+                console.log('65:::::', err)
+              }
+              console.log('results:', results);
+              labels = results[0];
+
+              console.log('Labels:', labels);
+              newInsect.description = req.body.description;
+              newInsect.created = Date.now();
+              newInsect.file = req.file;
+              newInsect.valueOne = labels[0].capitalize();
+              newInsect.valueTwo = labels[1].capitalize();
+              newInsect.valueThree = labels[2].capitalize();
+              
+
+              console.log('newInsect:', newInsect);
+              labels.forEach(function (element) {
+                console.log('foreach element:', element);
+
+              });
+            }).catch(function(error){
+              console.log('HAHAHAHA: ', error)
+            
+        }).then(function () {
+          return visionClient.detectSimilar(fileName)
+            .then(function (results, err) {
+              if (err) {
+                console.log('89:::::', err)
+              }
+              console.log('webResults:', results[1].responses);
+
+              var webEntity = results[1].responses[0].webDetection.webEntities;
+              newInsect.webEntityOne = webEntity[0].description.capitalize();
+              newInsect.webEntityTwo = webEntity[1].description.capitalize();
+              newInsect.webEntityThree = webEntity[2].description.capitalize();
+              labels.push(newInsect.webEntityOne, newInsect.webEntityTwo, newInsect.webEntityThree);
+              var isInsect = labels.some(value => value.toLowerCase() === 'insect' || value.toLowerCase() === 'butterfly');
+              if (!isInsect) {
+                res.status(400).send('showAlert');
+                return;
+              }
+              console.log('full Labels:', labels);
+
+              console.log('newInsect:', newInsect);
+              Insect.create(newInsect, function (err, newInsect) {
+                if (err) {
+                  console.log(err);
+                  return (err);
+                } else {
+                  res.status(200).send(results);
+                }
+
+              });
+
+            })
+            .catch(function(error){
+              console.log('HAHAHAHA: ', error)
+            });
+        });
     }
   });
-
-      /// Vision API detects labels ///
-      visionClient.detectLabels(fileName)
-        .then(function (results) {
-          console.log('results:', results);
-          var labels = results[0];
-          console.log('Labels:', labels);
-          newInsect.description = req.body.description;
-          newInsect.created = Date.now();
-          newInsect.file = req.file;
-          newInsect.valueOne = labels[0];
-          newInsect.valueTwo = labels[1];
-          newInsect.valueThree = labels[2];
-
-          console.log('newInsect:', newInsect);
-
-        });
-
-      /// Vision API detects webEntities ///
-      visionClient.detectSimilar(fileName)
-        .then(function (results) {
-          console.log('webResults:', results[1].responses);
-          
-          var webEntity = results[1].responses[0].webDetection.webEntities;
-          newInsect.webEntityOne = webEntity[0].description;
-          newInsect.webEntityTwo = webEntity[1].description;
-          newInsect.webEntityThree = webEntity[2].description;
-          console.log('newInsect:', newInsect);
-          Insect.create(newInsect, function (err, newInsect) {
-            if (err) {
-              console.log(err);
-              return (err);
-            } else {
-              res.status(200).send(results);
-            }
-
-          });
-
-        });
-    } //end Upload.create else
-  }); //end Upload.create
-}); //end ('/) post
-
+});
 
 /**
  * Gets the list of all files from the database
@@ -129,5 +160,9 @@ router.get('/:uuid/:filename', function (req, res, next) {
     }
   });
 });
+
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
 
 module.exports = router;

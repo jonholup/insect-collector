@@ -63,10 +63,29 @@ html, body {
   border-color: red;
 }
 
+#carousel .carousel-indicators {
+    bottom: none;
+    top: -17px;
+}
+
 #carousel .carousel-control {
     color: #000;
     opacity: 1;
-    font-size: 30px;
+    font-size: 42px;
     text-shadow: none;
     background-image: none;
+    width: 0%;
+}
+
+#carousel .carousel-indicators .active  {
+  background-color: red;
+}
+
+#carousel .carousel-indicators li {
+    border: 1px solid red;
+    border-radius: 0px;
+}
+
+#visionResults {
+  text-transform: capitalize;
 }
