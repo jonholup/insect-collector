@@ -6,3 +6,4 @@ node_modules
 .gitignore
 server/insect-collector-76b09bf1fbc3.json
 server/firebase-service-account.json
+uploads

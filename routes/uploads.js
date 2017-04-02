@@ -102,7 +102,7 @@ router.post('/', upload.single('file'), function (req, res, next) {
  * Gets the list of all files from the database
  */
 router.get('/', function (req, res, next) {
-  Upload.find({}, function (err, uploads) {
+  Insect.find({}, function (err, uploads) {
     if (err) next(err);
     else {
       res.send(uploads);

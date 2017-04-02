@@ -3,17 +3,22 @@
   <!--{{gc.bugs[1].imageURL}}-->
   <div id="carousel">
     <div uib-carousel active="active" no-wrap="noWrapSlides">
-      <div class="carousel-img" uib-slide ng-repeat="upload in uploads track by $index" index="$index">
+      <div class="carousel-img" uib-slide ng-repeat="upload in uploads track by $index" active="upload" index="$index">
         <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' style="margin:auto;">
         <div class="text-center">
+          <div>
           {{upload.description}}
+          </div>
+          {{upload.valueOne}}
         </div>
       </div>
     </div>
   </div>
-</div>
 <div>
-  <li ng-repeat="upload in uploads">
-    {{upload}}
-  </li>
+  {{uploads[active].valueOne}}
+  {{uploads[active].valueTwo}}
+  {{uploads[active].valueThree}}
+  {{uploads[active].webEntityOne}}
+  {{uploads[active].webEntityTwo}}
+  {{uploads[active].webEntityThree}}
 </div>

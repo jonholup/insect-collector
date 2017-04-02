@@ -1,3 +1,7 @@
+* {
+    font-family: 'Quicksand';
+}
+
 html, body {
   height: 100%;
 }
@@ -48,4 +52,21 @@ html, body {
   border-color: red;
   height: 305px;
   padding: 20px;
+  font-family: 'Quicksand';
+  /*font-size: 24px;*/
+}
+
+#insectLabels {
+  font-family: 'Quicksand';
+  border-style: double dotted double;
+  border-width: thick;
+  border-color: red;
+}
+
+#carousel .carousel-control {
+    color: #000;
+    opacity: 1;
+    font-size: 30px;
+    text-shadow: none;
+    background-image: none;
 }
