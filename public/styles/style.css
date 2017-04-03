@@ -6,6 +6,12 @@ html, body {
   height: 100%;
 }
 
+#signIn {
+  padding: none;
+  width: 191px;
+  height: 46px;
+}
+
 #mainHeader {
   color: red;
   text-align: center;
@@ -22,12 +28,6 @@ html, body {
 .navbar-nav > li {
   float: none;
   display: inline-block;
-}
-  
-.carousel-img img {
-  width: auto;
-  height: 225px;
-  max-height: 225px;
 }
 
 form {
@@ -52,14 +52,12 @@ form {
   border-color: red;
   height: 305px;
   padding: 20px;
-  font-family: 'Quicksand';
 }
 
-#insectLabels {
-  font-family: 'Quicksand';
-  border-style: double dotted double;
-  border-width: thick;
-  border-color: red;
+.carousel-img img {
+  width: auto;
+  height: 225px;
+  max-height: 225px;
 }
 
 #carousel .carousel-indicators {
@@ -85,8 +83,18 @@ form {
     border-radius: 0px;
 }
 
-#visionResults {
+.container .visionResults {
   text-transform: capitalize;
+  font-size: 18px;
+  border-style: double dotted double;
+  border-color: black;
+  /*height: 100px;*/
+  padding: 20px;
+  margin-top: 40px;
+}
+
+.container .visionResults span {
+  text-transform: none;
 }
 
 #carouselIndex {
@@ -99,3 +107,4 @@ form {
   z-index: 4;
   margin-top: 0px;
 }
+

@@ -20,6 +20,6 @@ myApp.config(['$routeProvider', function ($routeProvider) {
             templateUrl: '/views/templates/resources.html'
         })
         .otherwise({
-            redirectTo: 'gallery'
+            redirectTo: 'upload'
         });
 }]);

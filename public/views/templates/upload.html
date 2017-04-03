@@ -10,11 +10,4 @@
       <input type="submit" value="Submit" />
     </form>
   </div>
-  <h2>All uploads are here:</h2>
-  <ul>
-    <li ng-repeat="upload in uploads">
-      <p>{{upload.name}}</p>
-      <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}'>
-    </li>
-  </ul>
 </div>

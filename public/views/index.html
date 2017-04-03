@@ -23,18 +23,40 @@
   <link rel="stylesheet" href="../styles/style.css">
   <link href='//fonts.googleapis.com/css?family=Faster One' rel='stylesheet'>
   <link href='//fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
-  <link href="data:image/x-icon;base64,AAABAAEAEBAQAAAAAAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAhYWFAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAERERERERERERERERERERERERERERERERERERAAARERERERAREQEREREBASIiEBARERACAAAgAREREQIiIiAREREAAgAAIAARERECIiIgEREREAIiIiABEREBASIiEBAREREQEREBEREREREAABERERERERERERERERERERERERH//wAA//8AAP//AAD8PwAA+B8AANALAADAAwAA8A8AAMADAADwDwAAwAMAANALAAD4HwAA/D8AAP//AAD//wAA" rel="icon" type="image/x-icon" />
+  <link href="data:image/x-icon;base64,AAABAAEAEBAQAAAAAAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAhYWFAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAERERERERERERERERERERERERERERERERERERAAARERERERAREQEREREBASIiEBARERACAAAgAREREQIiIiAREREAAgAAIAARERECIiIgEREREAIiIiABEREBASIiEBAREREQEREBEREREREAABERERERERERERERERERERERERH//wAA//8AAP//AAD8PwAA+B8AANALAADAAwAA8A8AAMADAADwDwAAwAMAANALAAD4HwAA/D8AAP//AAD//wAA"
+    rel="icon" type="image/x-icon" />
 </head>
 
 <body ng-app="InsectApp">
   <header class="text-center" id="mainHeader" ng-include="'/views/templates/header.html'"></header>
   <div ng-controller="LogInController as lic">
     <nav ng-if="lic.userIsLoggedIn" ng-include="'/views/templates/nav.html'"></nav>
-    <button class="col-md-12 text-center" ng-if="lic.userIsLoggedOut" ng-click="lic.logIn()" class="g-signin2">Log In</button>
+    <div ng-if="lic.userIsLoggedOut" class="row">
+      <div class="col-sm-4">
+      </div>
+      <div class="col-sm-4 text-center">
+        <button class="text-center" ng-if="lic.userIsLoggedOut" ng-click="lic.logIn()" id="signIn"><img src="../assets/btn_google_signin_dark_normal_web.png" alt="Submit"></button>
+      </div>
+      <div class="col-sm-4">
+      </div>
+    </div>
+    <br>
+    <br>
+    <div ng-if="lic.userIsLoggedOut" class="row>">
+      <div class="col-sm-4">
+      </div>
+      <div class="col-sm-4">
+        <img src="../assets/atlasBeetle.jpg">
+      </div>
+      <div class="col-sm-4">
+      </div>
+    </div>
 
     <div ng-if="lic.userIsLoggedIn">
       <main ng-view>
       </main>
+    </div>
+  </div>
 </body>
 
 </html>
