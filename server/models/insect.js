@@ -9,7 +9,8 @@ var InsectSchema = mongoose.Schema({
   webEntityTwo: String,
   webEntityThree: String,
   created: Date,
-  file: Object
+  file: Object,
+  spotted: Date
 });
 
 module.exports = mongoose.model('Insect', InsectSchema);

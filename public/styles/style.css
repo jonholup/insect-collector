@@ -30,7 +30,7 @@ html, body {
   max-height: 225px;
 }
 
- form {
+form {
   width:50%;
   margin:30 auto;
   border-style: double dotted double;
@@ -40,7 +40,7 @@ html, body {
   text-align: center;
 }
 
-.center_div{
+.center_div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,7 +53,6 @@ html, body {
   height: 305px;
   padding: 20px;
   font-family: 'Quicksand';
-  /*font-size: 24px;*/
 }
 
 #insectLabels {
@@ -88,4 +87,15 @@ html, body {
 
 #visionResults {
   text-transform: capitalize;
+}
+
+#carouselIndex {
+  font-size: 30px;
+}
+
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .glyphicon-chevron-right {
+  top: 40%;
+  z-index: 4;
+  margin-top: 0px;
 }

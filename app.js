@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var index = require('./routes/index');
 var uploads = require('./routes/uploads');
 
+
 var app = express();
 
 var mongoURI = "mongodb://localhost:27017/insect-collector"; // replace with your mongodb url
@@ -22,6 +23,7 @@ MongoDB.once('open', function () {
   console.log('mongodb connection open');
 });
 
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -31,9 +33,11 @@ app.use(express.static('public'));
 app.use('/', index);
 app.use('/uploads', uploads);
 
+
 var server = app.listen(3000, function(){
   var port = server.address().port;
   console.log('Listening on port: ', port);
 });
+
 
 module.exports = app;

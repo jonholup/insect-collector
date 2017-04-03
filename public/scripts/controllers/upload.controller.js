@@ -6,9 +6,15 @@ myApp.controller('formCtrl', ['InsectFactory', '$scope', '$http', 'Upload', func
       method: 'post',
       data: $scope.upload
     }).then(function (response) {
-      console.log(response.data);
+      console.log('response:', response);
+      
       // $scope.uploads.push(response.data);
       $scope.upload = {};
+    }, function(response) {
+      if (response.status === 400) {
+        alert(response.data);
+        return;
+      }
     }).then(function () {
       $http.get('/uploads').then(function (response) {
         console.log(response.data);

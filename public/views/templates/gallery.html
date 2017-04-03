@@ -6,19 +6,20 @@
       <div class="carousel-img" uib-slide ng-repeat="upload in uploads track by $index" active="upload" index="$index">
         <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' style="margin:auto;">
         <div class="text-center">
-          <div>
-          {{upload.description}}
+          <div id="carouselIndex">
+            {{active + 1}} / {{uploads.length}}
           </div>
-          {{upload.valueOne}}
         </div>
       </div>
     </div>
   </div>
-<div id="visionResults">
-  <a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].valueOne}}">{{uploads[active].valueOne}}</a>
-  <a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].valueTwo}}">{{uploads[active].valueTwo}}</a>
-  <a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].valueThree}}">{{uploads[active].valueThree}}</a>
-  <a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].webEntityOne}}">{{uploads[active].webEntityOne}}</a>
-  <a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].webEntityTwo}}">{{uploads[active].webEntityTwo}}</a>
-  <a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].webEntityThree}}">{{uploads[active].webEntityThree}}</a>
-</div>
+  <div class="container">
+    <div id="visionResults">
+      <a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].valueOne}}">{{uploads[active].valueOne}}</a>
+      <a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].valueTwo}}">{{uploads[active].valueTwo}}</a>
+      <a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].valueThree}}">{{uploads[active].valueThree}}</a>
+      <a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].webEntityOne}}">{{uploads[active].webEntityOne}}</a>
+      <a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].webEntityTwo}}">{{uploads[active].webEntityTwo}}</a>
+      <a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].webEntityThree}}">{{uploads[active].webEntityThree}}</a>      {{uploads[active].description}} {{uploads[active].spotted | date : format : timezone}}
+    </div>
+  </div>
