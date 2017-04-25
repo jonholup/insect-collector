@@ -28,27 +28,20 @@
 </head>
 
 <body ng-app="InsectApp">
-  <header class="text-center" id="mainHeader" ng-include="'/views/templates/header.html'"></header>
+  <header class="col-sm-offset-4 col-sm-4 text-center" id="mainHeader" ng-include="'/views/templates/header.html'"></header>
   <div ng-controller="LogInController as lic">
     <nav ng-if="lic.userIsLoggedIn" ng-include="'/views/templates/nav.html'"></nav>
     <div ng-if="lic.userIsLoggedOut" class="row">
-      <div class="col-sm-4">
-      </div>
-      <div class="col-sm-4 text-center">
-        <button class="text-center" ng-if="lic.userIsLoggedOut" ng-click="lic.logIn()" id="signIn"><img src="../assets/btn_google_signin_dark_normal_web.png" alt="Submit"></button>
-      </div>
-      <div class="col-sm-4">
+      <div class="col-sm-offset-4 col-sm-4 text-center">
+        <button ng-if="lic.userIsLoggedOut" ng-click="lic.logIn()" type="submit" value="Submit" id="signIn"><img src="../assets/btn_google_signin_dark_normal_web.png" alt="Submit"></button>
       </div>
     </div>
     <br>
     <br>
+    <br>
     <div ng-if="lic.userIsLoggedOut" class="row>">
-      <div class="col-sm-4">
-      </div>
-      <div class="col-sm-4">
+      <div class="col-sm-offset-4 col-sm-4 text-center">
         <img src="../assets/atlasBeetle.jpg">
-      </div>
-      <div class="col-sm-4">
       </div>
     </div>
 

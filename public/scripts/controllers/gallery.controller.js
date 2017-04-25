@@ -3,10 +3,10 @@ myApp.controller("GalleryController", ['InsectFactory', '$http', '$firebaseAuth'
     var self = this;
     var auth = $firebaseAuth();
 
-       $http.get('/uploads').then(function(response){
-    console.log(response.data);
-    $scope.uploads = response.data;
-  });
+    $http.get('/uploads').then(function (response) {
+        console.log(response.data);
+        $scope.uploads = response.data;
+    });
 
     // self.getBugs = function () {
     //     InsectFactory.getBugs().then(function(data) {
@@ -21,7 +21,7 @@ myApp.controller("GalleryController", ['InsectFactory', '$http', '$firebaseAuth'
     //     });
     // };
 
-// self.getBugs();
+    // self.getBugs();
 
 
     // run route to get images from db

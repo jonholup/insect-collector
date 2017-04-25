@@ -33,8 +33,8 @@ router.post('/', upload.single('file'), function (req, res, next) {
   Upload.create(newUpload, function (err, newUpload) {
     var labels = [];
     if (err) {
-       res.status(400).send('Error with initial data upload! :-[');
-                return next(false);
+      res.status(400).send('Error with initial data upload! :-[');
+      return next(false);
     } else {
       var visionClient = Vision({
         projectId: projectId
@@ -63,33 +63,33 @@ router.post('/', upload.single('file'), function (req, res, next) {
       //       res.status(400).send('showAlert');
       //       return;
       //     }
-        //  }).then(function () {
+      //  }).then(function () {
 
 
-          /// Vision API detects labels ///
-          return visionClient.detectLabels(fileName)
-            .then(function (results, err) {
-              if (err) {
-                res.status(400).send('Error detecting labels! :-[');
-                return next(false);
-              }
-              console.log('results:', results);
-              
-              labels = results[0];
-              for (var index = 0; index < labels.length; index++) {
-                labels[index] = labels[index].capitalize();
-              }
+      /// Vision API detects labels ///
+      return visionClient.detectLabels(fileName)
+        .then(function (results, err) {
+          if (err) {
+            res.status(400).send('Error detecting labels! :-[');
+            return next(false);
+          }
+          console.log('results:', results);
 
-              newInsect.description = req.body.description;
-              newInsect.created = Date.now();
-              newInsect.file = req.file;
-              newInsect.valueOne = labels[0];
-              newInsect.valueTwo = labels[1];
-              newInsect.valueThree = labels[2];
-  
-            }).catch(function(error){
-              console.log('HAHAHAHA: ', error);
-            
+          labels = results[0];
+          for (var index = 0; index < labels.length; index++) {
+            labels[index] = labels[index].capitalize();
+          }
+
+          newInsect.description = req.body.description;
+          newInsect.created = Date.now();
+          newInsect.file = req.file;
+          newInsect.valueOne = labels[0];
+          newInsect.valueTwo = labels[1];
+          newInsect.valueThree = labels[2];
+
+        }).catch(function (error) {
+          console.log('HAHAHAHA: ', error);
+
         }).then(function () {
           return visionClient.detectSimilar(fileName)
             .then(function (results, err) {
@@ -102,25 +102,25 @@ router.post('/', upload.single('file'), function (req, res, next) {
               newInsect.webEntityTwo = webEntity[1].description.capitalize();
               newInsect.webEntityThree = webEntity[2].description.capitalize();
               labels.push(newInsect.webEntityOne, newInsect.webEntityTwo, newInsect.webEntityThree);
-    
+
               // If image is not an insect, do not save to database //
               var isInsect = labels.some(value => value === 'Insect' || value === 'Butterfly');
               if (!isInsect) {
-               res.status(400).send('Not an Insect!');
+                res.status(400).send('Not an Insect!');
                 return next(false);
               }
 
               Insect.create(newInsect, function (err, newInsect) {
                 if (err) {
-                res.status(400).send('Error adding insect to collection! :-[');
-                return next(false);
+                  res.status(400).send('Error adding insect to collection! :-[');
+                  return next(false);
                 } else {
                   res.status(200).send(results);
                 }
 
               });
 
-            }).catch(function(error){
+            }).catch(function (error) {
               console.log('error: ', error);
               res.status(400).send('Wait a moment and try again:', error);
             });
@@ -135,7 +135,7 @@ router.post('/', upload.single('file'), function (req, res, next) {
 router.get('/', function (req, res, next) {
   Insect.find({}, function (err, uploads) {
     if (err) {
-      return next(err);
+      return next (err);
     }
     else {
       res.send(uploads);
@@ -166,7 +166,7 @@ router.get('/:uuid/:filename', function (req, res, next) {
 });
 
 String.prototype.capitalize = function() {
-    return this.charAt(0).toUpperCase() + this.slice(1);
+  return this.charAt(0).toUpperCase() + this.slice(1);
 };
 
 module.exports = router;

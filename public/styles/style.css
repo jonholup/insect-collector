@@ -7,9 +7,16 @@ html, body {
 }
 
 #signIn {
-  padding: none;
   width: 191px;
   height: 46px;
+  background-size: cover;
+  background-position: center top;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: white;
+  /*background: url("../assets/btn_google_signin_dark_normal_web.png") no-repeat scroll 0 0 transparent;*/
+  
 }
 
 #mainHeader {
