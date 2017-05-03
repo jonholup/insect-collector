@@ -8,10 +8,8 @@ myApp.factory('InsectFactory', ['$http', function($http) {
   function getBugs() {
     return $http({
       method: 'GET',
-      url: '/getbug/all'
+      url: '/uploads/all'
     }).then(function(response) {
-      // console.log('response from factory: ', response);
-      // console.log('response.data from factory: ', response.data);
       return response.data;
     });
   }

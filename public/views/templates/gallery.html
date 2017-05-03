@@ -3,7 +3,7 @@
   <!--{{gc.bugs[1].imageURL}}-->
   <div id="carousel">
     <div uib-carousel active="active" no-wrap="noWrapSlides">
-      <div class="carousel-img" uib-slide ng-repeat="upload in uploads track by $index" active="upload" index="$index">
+      <div class="carousel-img" uib-slide ng-repeat="upload in gc.uploads track by $index" active="upload" index="$index">
         <img ng-src='{{upload.file.path + "/" + upload.file.originalname}}' style="margin:auto;">
         <div class="text-center">
           <div id="carouselIndex">
@@ -18,7 +18,7 @@
   <div class="row text-center">
     <div class="col-sm-4">
       <div class="visionResults">
-        Labels:<br> One: <a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].valueOne}}" target="_blank">{{uploads[active].valueOne}}</a><br>        Two: <a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].valueTwo}}" target="_blank">{{uploads[active].valueTwo}}</a><br>        Three: <a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].valueThree}}" target="_blank">{{uploads[active].valueThree}}</a>
+        Labels:<br><a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].valueOne}}" target="_blank">{{uploads[active].valueOne}}</a><br><a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].valueTwo}}" target="_blank">{{uploads[active].valueTwo}}</a><br><a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].valueThree}}" target="_blank">{{uploads[active].valueThree}}</a>
       </div>
     </div>
     <div class="col-sm-4">
@@ -28,7 +28,7 @@
     </div>
     <div class="col-sm-4">
       <div class="visionResults">
-        More Info:<br> One: <a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].webEntityOne}}" target="_blank">{{uploads[active].webEntityOne}}</a><br>        Two: <a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].webEntityTwo}}" target="_blank">{{uploads[active].webEntityTwo}}</a><br>        Three: <a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].webEntityThree}}" target="_blank">{{uploads[active].webEntityThree}}</a>
+        More Info:<br><a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].webEntityOne}}" target="_blank">{{uploads[active].webEntityOne}}</a><br><a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].webEntityTwo}}" target="_blank">{{uploads[active].webEntityTwo}}</a><br><a ng-href="https://en.wikipedia.org/wiki/{{uploads[active].webEntityThree}}" target="_blank">{{uploads[active].webEntityThree}}</a>
       </div>
     </div>
   </div>

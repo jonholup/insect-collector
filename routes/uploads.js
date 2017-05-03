@@ -18,9 +18,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 
-/**
- * Create's the file in the database
- */
+/*** Creates the file in the database***/
 router.post('/', upload.single('file'), function (req, res, next) {
   console.log('req.decodedToken:', req.decodedToken);
   console.log(req.body);
@@ -88,7 +86,7 @@ router.post('/', upload.single('file'), function (req, res, next) {
           newInsect.valueThree = labels[2];
 
         }).catch(function (error) {
-          console.log('HAHAHAHA: ', error);
+          console.log('error creating insect', error);
 
         }).then(function () {
           return visionClient.detectSimilar(fileName)
@@ -105,6 +103,7 @@ router.post('/', upload.single('file'), function (req, res, next) {
 
               // If image is not an insect, do not save to database //
               var isInsect = labels.some(value => value === 'Insect' || value === 'Butterfly');
+
               if (!isInsect) {
                 res.status(400).send('Not an Insect!');
                 return next(false);
@@ -129,13 +128,11 @@ router.post('/', upload.single('file'), function (req, res, next) {
   });
 });
 
-/**
- * Gets the list of all files from the database
- */
-router.get('/', function (req, res, next) {
+/*** Gets the list of all files from the database***/
+router.get('/all', function (req, res, next) {
   Insect.find({}, function (err, uploads) {
     if (err) {
-      return next (err);
+      return next(err);
     }
     else {
       res.send(uploads);
@@ -165,7 +162,7 @@ router.get('/:uuid/:filename', function (req, res, next) {
   });
 });
 
-String.prototype.capitalize = function() {
+String.prototype.capitalize = function () {
   return this.charAt(0).toUpperCase() + this.slice(1);
 };
 
