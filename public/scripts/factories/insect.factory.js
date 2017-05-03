@@ -1,10 +1,5 @@
 myApp.factory('InsectFactory', ['$http', function($http) {
 
-  var specimen = { list: [] };
-  var userEmails = { list: [] };
-  var bugs = { list: [] };
-
-
   function getBugs() {
     return $http({
       method: 'GET',
@@ -56,9 +51,6 @@ myApp.factory('InsectFactory', ['$http', function($http) {
 
 
   return {
-    specimen: specimen,
-    bugs: bugs,
-    userEmails: userEmails,
     getBugs: getBugs,
     addBug: addBug,
     deleteBug: deleteBug,
